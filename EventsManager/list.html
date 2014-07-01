@@ -1,0 +1,42 @@
+﻿
+<form class="form-search">
+    <div class="input-append">
+        <input type="text" ng-model="query" class="input-medium search-query" placeholder="Search">
+        <button ng-click="reset()" type="submit" class="btn"><i class="glyphicon glyphicon-search"></i></button>
+    </div>
+    <button ng-click="query=''; reset()" ng-disabled="!query" type="submit" class="btn">Reset</button>
+</form>
+
+<table class="table table-striped table-condensed table-hover">
+    <thead>
+        <th><a ng-click="sort('EventTitle')">Title</a>
+            <span ng-show="sort_order=='EventTitle' && is_desc == true">
+                <i class="glyphicon glyphicon-arrow-down"></i>
+            </span>
+            <span ng-show="sort_order=='EventTitle' && is_desc == false">
+                <i class="glyphicon glyphicon-arrow-up"></i>
+            </span>
+        </th>
+        <th><a ng-click="sort('EventDate')">Date</a>
+            <span ng-show="sort_order=='EventDate' && is_desc == true">
+                <i class="glyphicon glyphicon-arrow-down"></i>
+            </span>
+            <span ng-show="sort_order=='EventDate' && is_desc == false">
+                <i class="glyphicon glyphicon-arrow-up"></i>
+            </span></th>
+        <th>&nbsp;</th>
+        <th><a href="#/new"><i class ="glyphicon glyphicon-plus-sign"></i></a></th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="calendarEvent in items" id="event_{{calendarEvent.Id}}">
+            <td><strong>{{calendarEvent.EventTitle}}</strong><br/>{{calendarEvent.EventDescription}}</td>
+            <td>{{calendarEvent.EventDate | date:mediumDate}}</td>
+            <td><img src="{{calendarEvent.ThumbnailUrl}}" alt="" width="100" /></td>
+            <td>
+                <a href="#/edit/{{calendarEvent.Id}}"><i class="glyphicon glyphicon-edit"></i></a>
+                <a ng-click="delete()"><i class="glyphicon glyphicon-remove"></i></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<a ng-show="has_more()" ng-click="show_more()">Show more</a>

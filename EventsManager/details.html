@@ -1,0 +1,40 @@
+﻿<h2>{{action}} Event</h2>
+
+<form name="form" class="form-horizontal">
+    <div class="control-group" ng-class="{error: form.EventTitle.$invalid}">
+        <label class="control-label" for="EventTitle">Event Title</label>
+        <div class="controls">
+            <input type="text" ng-model="item.EventTitle" id="EventTitle">
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: form.EventDescription.$invalid}">
+        <label class="control-label" for="EventDescription">Event Description</label>
+        <div class="controls">
+            <input type="text" ng-model="item.EventDescription" id="EventDescription">
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: form.EventDate.$invalid}">
+        <label class="control-label" for="EventDate">Event Date</label>
+        <div class="controls">
+            <input type="date" ng-model="item.EventDate" id="EventDate">
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: form.ThumbnailUrl.$invalid}">
+        <label class="control-label" for="ThumbnailUrl">Thumbnail Url</label>
+        <div class="controls">
+            <input type="url" ng-model="item.ThumbnailUrl" id="ThumbnailUrl">
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: form.ImageUrl.$invalid}">
+        <label class="control-label" for="ImageUrl">Image Url</label>
+        <div class="controls">
+            <input type="url" ng-model="item.ImageUrl" id="ImageUrl">
+        </div>
+    </div>
+    <div class="form-actions">
+        <button ng-click="save()" class="btn btn-primary">
+            {{action}}
+        </button>
+        <a href="#/" class="btn">Cancel</a>
+    </div>
+</form>
