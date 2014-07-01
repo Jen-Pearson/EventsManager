@@ -18,5 +18,11 @@ namespace EventsManager.Models
         }
 
         public DbSet<CalendarEvent> CalendarEvents { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer(
+                new MigrateDatabaseToLatestVersion<CalendarEventContext, Migrations.Configuration>());
+        }
     }
 }
