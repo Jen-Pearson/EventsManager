@@ -25,7 +25,7 @@
                 <i class="glyphicon glyphicon-arrow-up"></i>
             </span></th>
         <th>&nbsp;</th>
-        <th><a href="#/new"><i class ="glyphicon glyphicon-plus-sign"></i></a></th>
+        <th><a href="#/new" ng-show="isAuthorised"><i class="glyphicon glyphicon-plus-sign"></i></a></th>
     </thead>
     <tbody>
         <tr ng-repeat="calendarEvent in items" id="event_{{calendarEvent.Id}}">
@@ -33,8 +33,10 @@
             <td>{{calendarEvent.EventDate | date:mediumDate}}</td>
             <td><img src="{{calendarEvent.ThumbnailUrl}}" alt="" width="100" /></td>
             <td>
-                <a href="#/edit/{{calendarEvent.Id}}"><i class="glyphicon glyphicon-edit"></i></a>
-                <a ng-click="delete()"><i class="glyphicon glyphicon-remove"></i></a>
+                <div ng-show="isAuthorised"> 
+                    <a href="#/edit/{{calendarEvent.Id}}"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a ng-click="delete()"><i class="glyphicon glyphicon-remove"></i></a>
+                </div>
             </td>
         </tr>
     </tbody>

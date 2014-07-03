@@ -15,26 +15,19 @@ namespace EventsManager.Migrations
         protected override void Seed(EventsManager.Models.CalendarEventContext context)
         {
 
-            var item = new CalendarEvent {
-                EventTitle = "SampleEvent",
-                EventDescription = "This would be a really cool event to attend",
-                 ImageUrl = "http://kimolsen.files.wordpress.com/2008/01/lolcats-funny-picture-lalalalala.jpg",
-                 ThumbnailUrl = "http://kimolsen.files.wordpress.com/2008/01/lolcats-funny-picture-lalalalala.jpg",
-                 EventDate = DateTime.Now.AddDays(3)
-            };
-
-            context.CalendarEvents.AddOrUpdate(item);
-
-            var item2 = new CalendarEvent
+            var user1 = new ApprovedUser()
             {
-                EventTitle = "Sample Event 2",
-                EventDescription = "This would be a really cool event to attend",
-                ImageUrl = "http://kimolsen.files.wordpress.com/2008/01/lolcats-funny-picture-lalalalala.jpg",
-                ThumbnailUrl = "http://kimolsen.files.wordpress.com/2008/01/lolcats-funny-picture-lalalalala.jpg",
-                EventDate = DateTime.Now.AddDays(3)
+                ValidEmailAddress = "jen.pearson@tal.com.au"
             };
 
-            context.CalendarEvents.AddOrUpdate(item2);
+            var user2 = new ApprovedUser()
+            {
+                ValidEmailAddress = "andrew.wood-rich@tal.com.au"
+            };
+
+            context.ApprovedUsers.AddOrUpdate(user1);
+            context.ApprovedUsers.AddOrUpdate(user2);
+
         }
     }
 }
