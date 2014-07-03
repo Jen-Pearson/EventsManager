@@ -44,6 +44,7 @@ var LoginCtrl = function ($scope, $location, $http, SharedService) {
             var isAuthorised = result.toLowerCase();
             if (isAuthorised) {
                 SharedService.set(isAuthorised);
+
                 $location.path('/');
             } else {
                 alert('you do not have the power!');
@@ -137,5 +138,9 @@ var ListCtrl = function ($scope, $location, CalendarEvent, SharedService) {
 
     $scope.reset();
 
-    $scope.isAuthorised = SharedService.get();
+    var authorised = SharedService.get();
+    if (authorised != "true")
+        $scope.isAuthorised = false;
+    else
+        $scope.isAuthorised = SharedService.get();
 };

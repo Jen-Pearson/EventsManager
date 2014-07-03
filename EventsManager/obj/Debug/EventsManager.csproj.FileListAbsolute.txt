@@ -71,3 +71,4 @@ C:\source\Projects\EventsManager\EventsManager\bin\EventsManager.dll.config
 C:\source\Projects\EventsManager\EventsManager\obj\Debug\EventsManager.Migrations.InitialCreate.resources
 C:\source\Projects\EventsManager\EventsManager\obj\Debug\EventsManager.csproj.GenerateResource.Cache
 C:\source\Projects\EventsManager\EventsManager\obj\Debug\EventsManager.Migrations.AddingUsers.resources
+C:\source\Projects\EventsManager\EventsManager\obj\Debug\EventsManager.csprojResolveAssemblyReference.cache
