@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using EventsManager.Migrations;
 
 namespace EventsManager.Models
 {
@@ -22,8 +23,8 @@ namespace EventsManager.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer(
-                new DropCreateDatabaseIfModelChanges<EventsManager.Models.CalendarEventContext>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<CalendarEventContext, Configuration>());
+            
         }
     }
 }
