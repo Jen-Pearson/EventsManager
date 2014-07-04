@@ -25,15 +25,15 @@
                 <i class="glyphicon glyphicon-arrow-up"></i>
             </span></th>
         <th>&nbsp;</th>
-        <th><a href="#/new" ng-show="isAuthorised"><i class="glyphicon glyphicon-plus-sign"></i></a></th>
+        <th><a href="#/new" ng-show="savedData.isAuthorised"><i class="glyphicon glyphicon-plus-sign"></i></a></th>
     </thead>
     <tbody>
         <tr ng-repeat="calendarEvent in items" id="event_{{calendarEvent.Id}}">
             <td><strong>{{calendarEvent.EventTitle}}</strong><br/>{{calendarEvent.EventDescription}}</td>
             <td>{{calendarEvent.EventDate | date:mediumDate}}</td>
-            <td><img src="{{calendarEvent.ThumbnailUrl}}" alt="" width="100" /></td>
+            <td><img ng-src="{{calendarEvent.ThumbnailUrl}}" alt="" width="100" /></td>
             <td>
-                <div ng-show="isAuthorised"> 
+                <div ng-show="savedData.isAuthorised">
                     <a href="#/edit/{{calendarEvent.Id}}"><i class="glyphicon glyphicon-edit"></i></a>
                     <a ng-click="delete()"><i class="glyphicon glyphicon-remove"></i></a>
                 </div>

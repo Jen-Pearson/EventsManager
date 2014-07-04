@@ -16,7 +16,10 @@
     <div class="control-group" ng-class="{error: form.EventDate.$invalid}">
         <label class="control-label" for="EventDate">Event Date</label>
         <div class="controls">
-            <input type="date" ng-model="item.EventDate" id="EventDate">
+            <input type="date" ng-model="item.EventDate" id="EventDate" date-field>
+            <span ng-show="form.EventDate.$error.date" class="error">
+                Please enter a valid date!
+            </span>  
         </div>
     </div>
     <div class="control-group" ng-class="{error: form.ThumbnailUrl.$invalid}">

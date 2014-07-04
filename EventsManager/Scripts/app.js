@@ -18,11 +18,19 @@ EventsCalendarApp.factory('AuthorisedUser', function ($resource) {
 });
 
 EventsCalendarApp.factory('SharedService', function() {
-    var savedData = {}
+    var savedData = { isAuthorised: false }
 
     function set(data) {
-        savedData = data;
+        // overwrites savedData properties with data's properties, 
+        // but preserves the reference
+        angular.copy(data, savedData);
+
     }
+
+    function setAuthorised(authorised) {
+        savedData.isAuthorised = authorised;
+    }
+
 
     function get() {
         return savedData;
@@ -30,20 +38,25 @@ EventsCalendarApp.factory('SharedService', function() {
 
     return {
         set: set,
-        get: get
+        get: get,
+        setAuthorised: setAuthorised
+
     }
 });
 
 var LoginCtrl = function ($scope, $location, $http, SharedService) {
 
-
+    // helper function to determine if str contains 'true'
+    function parseBoolean(str) {
+        return /^true$/i.test(str);
+    }
 
     $scope.login = function () {
         $http.get("/AuthorisedUser/IsValidUser/" + $scope.item.ValidEmailAddress + "/")
         .success(function (result) {
-            var isAuthorised = result.toLowerCase();
+            var isAuthorised = parseBoolean(result);
             if (isAuthorised) {
-                SharedService.set(isAuthorised);
+                SharedService.setAuthorised(isAuthorised);
 
                 $location.path('/');
             } else {
@@ -138,9 +151,29 @@ var ListCtrl = function ($scope, $location, CalendarEvent, SharedService) {
 
     $scope.reset();
 
-    var authorised = SharedService.get();
-    if (authorised != "true")
-        $scope.isAuthorised = false;
-    else
-        $scope.isAuthorised = SharedService.get();
+    $scope.savedData = SharedService.get();
+
 };
+
+EventsCalendarApp.directive('dateField', function ($filter) {
+    return {
+        require: 'ngModel',
+        link: function (scope, element, attrs, ngModelController) {
+            ngModelController.$parsers.push(function (data) {
+
+                //View -> Model
+                var date = Date.parseExact(data, 'dd/MM/yyyy');
+                
+                date = date.addHours(11);
+                // if the date field is not a valid date 
+                // then set a 'date' error flag by calling $setValidity
+                ngModelController.$setValidity('date', date != null);
+                return date == null ? undefined : date;
+            });
+            ngModelController.$formatters.push(function (data) {
+                //Model -> View
+                return $filter('date')(data, "dd/MM/yyyy");
+            });
+        }
+    }
+});

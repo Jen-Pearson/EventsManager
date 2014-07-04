@@ -25,6 +25,8 @@ namespace EventsManager.Controllers
             IQueryable<CalendarEvent> items = string.IsNullOrEmpty(sort) ? list.OrderBy(o => o.EventDate)
                 : list.OrderBy(String.Format("it.{0} {1}", sort, desc ? "DESC" : "ASC"));
 
+            items = items.Where(o => o.EventDate > DateTime.Now);
+
             //figure if we search by anything it would be description
             if (!string.IsNullOrEmpty(q) && q != "undefined") items = items.Where(t => t.EventDescription.Contains(q));
 
